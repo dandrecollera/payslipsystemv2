@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="payslip" targetNamespace="http://tempuri.org/payslip.xsd" xmlns:mstns="http://tempuri.org/payslip.xsd" xmlns="http://tempuri.org/payslip.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="payslip" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="payslip" msprop:Generator_UserDSName="payslip">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="payslip" msprop:Generator_TableClassName="payslipDataTable" msprop:Generator_TableVarName="tablepayslip" msprop:Generator_RowChangedName="payslipRowChanged" msprop:Generator_TablePropName="_payslip" msprop:Generator_RowDeletingName="payslipRowDeleting" msprop:Generator_RowChangingName="payslipRowChanging" msprop:Generator_RowEvHandlerName="payslipRowChangeEventHandler" msprop:Generator_RowDeletedName="payslipRowDeleted" msprop:Generator_RowClassName="payslipRow" msprop:Generator_UserTableName="payslip" msprop:Generator_RowEvArgName="payslipRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" minOccurs="0" />
+              <xs:element name="month" msprop:Generator_ColumnVarNameInTable="columnmonth" msprop:Generator_ColumnPropNameInRow="month" msprop:Generator_ColumnPropNameInTable="monthColumn" msprop:Generator_UserColumnName="month" type="xs:string" minOccurs="0" />
+              <xs:element name="cutoff" msprop:Generator_ColumnVarNameInTable="columncutoff" msprop:Generator_ColumnPropNameInRow="cutoff" msprop:Generator_ColumnPropNameInTable="cutoffColumn" msprop:Generator_UserColumnName="cutoff" type="xs:string" minOccurs="0" />
+              <xs:element name="generalsalary" msprop:Generator_ColumnVarNameInTable="columngeneralsalary" msprop:Generator_ColumnPropNameInRow="generalsalary" msprop:Generator_ColumnPropNameInTable="generalsalaryColumn" msprop:Generator_UserColumnName="generalsalary" type="xs:string" minOccurs="0" />
+              <xs:element name="overtime" msprop:Generator_ColumnVarNameInTable="columnovertime" msprop:Generator_ColumnPropNameInRow="overtime" msprop:Generator_ColumnPropNameInTable="overtimeColumn" msprop:Generator_UserColumnName="overtime" type="xs:string" minOccurs="0" />
+              <xs:element name="bonus" msprop:Generator_ColumnVarNameInTable="columnbonus" msprop:Generator_ColumnPropNameInRow="bonus" msprop:Generator_ColumnPropNameInTable="bonusColumn" msprop:Generator_UserColumnName="bonus" type="xs:string" minOccurs="0" />
+              <xs:element name="totalwodeduct" msprop:Generator_ColumnVarNameInTable="columntotalwodeduct" msprop:Generator_ColumnPropNameInRow="totalwodeduct" msprop:Generator_ColumnPropNameInTable="totalwodeductColumn" msprop:Generator_UserColumnName="totalwodeduct" type="xs:string" minOccurs="0" />
+              <xs:element name="sss" msprop:Generator_ColumnVarNameInTable="columnsss" msprop:Generator_ColumnPropNameInRow="sss" msprop:Generator_ColumnPropNameInTable="sssColumn" msprop:Generator_UserColumnName="sss" type="xs:string" minOccurs="0" />
+              <xs:element name="pagibig" msprop:Generator_ColumnVarNameInTable="columnpagibig" msprop:Generator_ColumnPropNameInRow="pagibig" msprop:Generator_ColumnPropNameInTable="pagibigColumn" msprop:Generator_UserColumnName="pagibig" type="xs:string" minOccurs="0" />
+              <xs:element name="philhealth" msprop:Generator_ColumnVarNameInTable="columnphilhealth" msprop:Generator_ColumnPropNameInRow="philhealth" msprop:Generator_ColumnPropNameInTable="philhealthColumn" msprop:Generator_UserColumnName="philhealth" type="xs:string" minOccurs="0" />
+              <xs:element name="tax" msprop:Generator_ColumnVarNameInTable="columntax" msprop:Generator_ColumnPropNameInRow="tax" msprop:Generator_ColumnPropNameInTable="taxColumn" msprop:Generator_UserColumnName="tax" type="xs:string" minOccurs="0" />
+              <xs:element name="finaltotal" msprop:Generator_ColumnVarNameInTable="columnfinaltotal" msprop:Generator_ColumnPropNameInRow="finaltotal" msprop:Generator_ColumnPropNameInTable="finaltotalColumn" msprop:Generator_UserColumnName="finaltotal" type="xs:string" minOccurs="0" />
+              <xs:element name="year" msprop:Generator_ColumnVarNameInTable="columnyear" msprop:Generator_ColumnPropNameInRow="year" msprop:Generator_ColumnPropNameInTable="yearColumn" msprop:Generator_UserColumnName="year" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
