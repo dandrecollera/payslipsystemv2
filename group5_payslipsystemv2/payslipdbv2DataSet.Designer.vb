@@ -33,9 +33,21 @@ Partial Public Class payslipdbv2DataSet
     
     Private tablereports As reportsDataTable
     
+    Private tableabsent As absentDataTable
+    
+    Private tableleaves As leavesDataTable
+    
+    Private tableaudits As auditsDataTable
+    
     Private relationuserconstraint As Global.System.Data.DataRelation
     
     Private relationreportuser As Global.System.Data.DataRelation
+    
+    Private relationemployee As Global.System.Data.DataRelation
+    
+    Private relationleavesemployee As Global.System.Data.DataRelation
+    
+    Private relationauditids As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -77,6 +89,15 @@ Partial Public Class payslipdbv2DataSet
             End If
             If (Not (ds.Tables("reports")) Is Nothing) Then
                 MyBase.Tables.Add(New reportsDataTable(ds.Tables("reports")))
+            End If
+            If (Not (ds.Tables("absent")) Is Nothing) Then
+                MyBase.Tables.Add(New absentDataTable(ds.Tables("absent")))
+            End If
+            If (Not (ds.Tables("leaves")) Is Nothing) Then
+                MyBase.Tables.Add(New leavesDataTable(ds.Tables("leaves")))
+            End If
+            If (Not (ds.Tables("audits")) Is Nothing) Then
+                MyBase.Tables.Add(New auditsDataTable(ds.Tables("audits")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -132,6 +153,36 @@ Partial Public Class payslipdbv2DataSet
     Public ReadOnly Property reports() As reportsDataTable
         Get
             Return Me.tablereports
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property absent() As absentDataTable
+        Get
+            Return Me.tableabsent
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property leaves() As leavesDataTable
+        Get
+            Return Me.tableleaves
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property audits() As auditsDataTable
+        Get
+            Return Me.tableaudits
         End Get
     End Property
     
@@ -214,6 +265,15 @@ Partial Public Class payslipdbv2DataSet
             If (Not (ds.Tables("reports")) Is Nothing) Then
                 MyBase.Tables.Add(New reportsDataTable(ds.Tables("reports")))
             End If
+            If (Not (ds.Tables("absent")) Is Nothing) Then
+                MyBase.Tables.Add(New absentDataTable(ds.Tables("absent")))
+            End If
+            If (Not (ds.Tables("leaves")) Is Nothing) Then
+                MyBase.Tables.Add(New leavesDataTable(ds.Tables("leaves")))
+            End If
+            If (Not (ds.Tables("audits")) Is Nothing) Then
+                MyBase.Tables.Add(New auditsDataTable(ds.Tables("audits")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -270,8 +330,29 @@ Partial Public Class payslipdbv2DataSet
                 Me.tablereports.InitVars
             End If
         End If
+        Me.tableabsent = CType(MyBase.Tables("absent"),absentDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableabsent) Is Nothing) Then
+                Me.tableabsent.InitVars
+            End If
+        End If
+        Me.tableleaves = CType(MyBase.Tables("leaves"),leavesDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableleaves) Is Nothing) Then
+                Me.tableleaves.InitVars
+            End If
+        End If
+        Me.tableaudits = CType(MyBase.Tables("audits"),auditsDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableaudits) Is Nothing) Then
+                Me.tableaudits.InitVars
+            End If
+        End If
         Me.relationuserconstraint = Me.Relations("userconstraint")
         Me.relationreportuser = Me.Relations("reportuser")
+        Me.relationemployee = Me.Relations("employee")
+        Me.relationleavesemployee = Me.Relations("leavesemployee")
+        Me.relationauditids = Me.Relations("auditids")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -290,10 +371,22 @@ Partial Public Class payslipdbv2DataSet
         MyBase.Tables.Add(Me.tableuser_accounts)
         Me.tablereports = New reportsDataTable()
         MyBase.Tables.Add(Me.tablereports)
+        Me.tableabsent = New absentDataTable()
+        MyBase.Tables.Add(Me.tableabsent)
+        Me.tableleaves = New leavesDataTable()
+        MyBase.Tables.Add(Me.tableleaves)
+        Me.tableaudits = New auditsDataTable()
+        MyBase.Tables.Add(Me.tableaudits)
         Me.relationuserconstraint = New Global.System.Data.DataRelation("userconstraint", New Global.System.Data.DataColumn() {Me.tableemployee.idColumn}, New Global.System.Data.DataColumn() {Me.tabletimeinout.employee_idColumn}, false)
         Me.Relations.Add(Me.relationuserconstraint)
         Me.relationreportuser = New Global.System.Data.DataRelation("reportuser", New Global.System.Data.DataColumn() {Me.tableuser_accounts.idColumn}, New Global.System.Data.DataColumn() {Me.tablereports.authidColumn}, false)
         Me.Relations.Add(Me.relationreportuser)
+        Me.relationemployee = New Global.System.Data.DataRelation("employee", New Global.System.Data.DataColumn() {Me.tableemployee.idColumn}, New Global.System.Data.DataColumn() {Me.tableabsent.employee_idColumn}, false)
+        Me.Relations.Add(Me.relationemployee)
+        Me.relationleavesemployee = New Global.System.Data.DataRelation("leavesemployee", New Global.System.Data.DataColumn() {Me.tableemployee.idColumn}, New Global.System.Data.DataColumn() {Me.tableleaves.employee_idColumn}, false)
+        Me.Relations.Add(Me.relationleavesemployee)
+        Me.relationauditids = New Global.System.Data.DataRelation("auditids", New Global.System.Data.DataColumn() {Me.tableuser_accounts.idColumn}, New Global.System.Data.DataColumn() {Me.tableaudits.user_idColumn}, false)
+        Me.Relations.Add(Me.relationauditids)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -317,6 +410,24 @@ Partial Public Class payslipdbv2DataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Private Function ShouldSerializereports() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeabsent() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeleaves() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeaudits() As Boolean
         Return false
     End Function
     
@@ -389,6 +500,15 @@ Partial Public Class payslipdbv2DataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Public Delegate Sub reportsRowChangeEventHandler(ByVal sender As Object, ByVal e As reportsRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub absentRowChangeEventHandler(ByVal sender As Object, ByVal e As absentRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub leavesRowChangeEventHandler(ByVal sender As Object, ByVal e As leavesRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub auditsRowChangeEventHandler(ByVal sender As Object, ByVal e As auditsRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -1761,6 +1881,987 @@ Partial Public Class payslipdbv2DataSet
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class absentDataTable
+        Inherits Global.System.Data.TypedTableBase(Of absentRow)
+        
+        Private columnid As Global.System.Data.DataColumn
+        
+        Private columnemployee_id As Global.System.Data.DataColumn
+        
+        Private columnemployee As Global.System.Data.DataColumn
+        
+        Private columndetail As Global.System.Data.DataColumn
+        
+        Private columndate As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "absent"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property employee_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnemployee_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property employeeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnemployee
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property detailColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndetail
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property dateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As absentRow
+            Get
+                Return CType(Me.Rows(index),absentRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event absentRowChanging As absentRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event absentRowChanged As absentRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event absentRowDeleting As absentRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event absentRowDeleted As absentRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddabsentRow(ByVal row As absentRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddabsentRow(ByVal parentemployeeRowByemployee As employeeRow, ByVal employee As String, ByVal detail As String, ByVal _date As Date) As absentRow
+            Dim rowabsentRow As absentRow = CType(Me.NewRow,absentRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, employee, detail, _date}
+            If (Not (parentemployeeRowByemployee) Is Nothing) Then
+                columnValuesArray(1) = parentemployeeRowByemployee(0)
+            End If
+            rowabsentRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowabsentRow)
+            Return rowabsentRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindByid(ByVal id As Integer) As absentRow
+            Return CType(Me.Rows.Find(New Object() {id}),absentRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As absentDataTable = CType(MyBase.Clone,absentDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New absentDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnid = MyBase.Columns("id")
+            Me.columnemployee_id = MyBase.Columns("employee_id")
+            Me.columnemployee = MyBase.Columns("employee")
+            Me.columndetail = MyBase.Columns("detail")
+            Me.columndate = MyBase.Columns("date")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnid = New Global.System.Data.DataColumn("id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnid)
+            Me.columnemployee_id = New Global.System.Data.DataColumn("employee_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnemployee_id)
+            Me.columnemployee = New Global.System.Data.DataColumn("employee", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnemployee)
+            Me.columndetail = New Global.System.Data.DataColumn("detail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndetail)
+            Me.columndate = New Global.System.Data.DataColumn("date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columndate.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "dateColumn")
+            Me.columndate.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columndate")
+            Me.columndate.ExtendedProperties.Add("Generator_UserColumnName", "date")
+            MyBase.Columns.Add(Me.columndate)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnid}, true))
+            Me.columnid.AutoIncrement = true
+            Me.columnid.AutoIncrementSeed = -1
+            Me.columnid.AutoIncrementStep = -1
+            Me.columnid.AllowDBNull = false
+            Me.columnid.Unique = true
+            Me.columnemployee_id.AllowDBNull = false
+            Me.columnemployee.AllowDBNull = false
+            Me.columnemployee.MaxLength = 65535
+            Me.columndetail.AllowDBNull = false
+            Me.columndetail.MaxLength = 65535
+            Me.columndate.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewabsentRow() As absentRow
+            Return CType(Me.NewRow,absentRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New absentRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(absentRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.absentRowChangedEvent) Is Nothing) Then
+                RaiseEvent absentRowChanged(Me, New absentRowChangeEvent(CType(e.Row,absentRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.absentRowChangingEvent) Is Nothing) Then
+                RaiseEvent absentRowChanging(Me, New absentRowChangeEvent(CType(e.Row,absentRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.absentRowDeletedEvent) Is Nothing) Then
+                RaiseEvent absentRowDeleted(Me, New absentRowChangeEvent(CType(e.Row,absentRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.absentRowDeletingEvent) Is Nothing) Then
+                RaiseEvent absentRowDeleting(Me, New absentRowChangeEvent(CType(e.Row,absentRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveabsentRow(ByVal row As absentRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As payslipdbv2DataSet = New payslipdbv2DataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "absentDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class leavesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of leavesRow)
+        
+        Private columnid As Global.System.Data.DataColumn
+        
+        Private columnemployee_id As Global.System.Data.DataColumn
+        
+        Private columnemployee As Global.System.Data.DataColumn
+        
+        Private columndetail As Global.System.Data.DataColumn
+        
+        Private columndate As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "leaves"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property employee_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnemployee_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property employeeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnemployee
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property detailColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndetail
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property dateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As leavesRow
+            Get
+                Return CType(Me.Rows(index),leavesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event leavesRowChanging As leavesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event leavesRowChanged As leavesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event leavesRowDeleting As leavesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event leavesRowDeleted As leavesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddleavesRow(ByVal row As leavesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddleavesRow(ByVal parentemployeeRowByleavesemployee As employeeRow, ByVal employee As String, ByVal detail As String, ByVal _date As Date) As leavesRow
+            Dim rowleavesRow As leavesRow = CType(Me.NewRow,leavesRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, employee, detail, _date}
+            If (Not (parentemployeeRowByleavesemployee) Is Nothing) Then
+                columnValuesArray(1) = parentemployeeRowByleavesemployee(0)
+            End If
+            rowleavesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowleavesRow)
+            Return rowleavesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindByid(ByVal id As Integer) As leavesRow
+            Return CType(Me.Rows.Find(New Object() {id}),leavesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As leavesDataTable = CType(MyBase.Clone,leavesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New leavesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnid = MyBase.Columns("id")
+            Me.columnemployee_id = MyBase.Columns("employee_id")
+            Me.columnemployee = MyBase.Columns("employee")
+            Me.columndetail = MyBase.Columns("detail")
+            Me.columndate = MyBase.Columns("date")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnid = New Global.System.Data.DataColumn("id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnid)
+            Me.columnemployee_id = New Global.System.Data.DataColumn("employee_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnemployee_id)
+            Me.columnemployee = New Global.System.Data.DataColumn("employee", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnemployee)
+            Me.columndetail = New Global.System.Data.DataColumn("detail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndetail)
+            Me.columndate = New Global.System.Data.DataColumn("date", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columndate.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "dateColumn")
+            Me.columndate.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columndate")
+            Me.columndate.ExtendedProperties.Add("Generator_UserColumnName", "date")
+            MyBase.Columns.Add(Me.columndate)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnid}, true))
+            Me.columnid.AutoIncrement = true
+            Me.columnid.AutoIncrementSeed = -1
+            Me.columnid.AutoIncrementStep = -1
+            Me.columnid.AllowDBNull = false
+            Me.columnid.Unique = true
+            Me.columnemployee_id.AllowDBNull = false
+            Me.columnemployee.AllowDBNull = false
+            Me.columnemployee.MaxLength = 65535
+            Me.columndetail.AllowDBNull = false
+            Me.columndetail.MaxLength = 65535
+            Me.columndate.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewleavesRow() As leavesRow
+            Return CType(Me.NewRow,leavesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New leavesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(leavesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.leavesRowChangedEvent) Is Nothing) Then
+                RaiseEvent leavesRowChanged(Me, New leavesRowChangeEvent(CType(e.Row,leavesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.leavesRowChangingEvent) Is Nothing) Then
+                RaiseEvent leavesRowChanging(Me, New leavesRowChangeEvent(CType(e.Row,leavesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.leavesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent leavesRowDeleted(Me, New leavesRowChangeEvent(CType(e.Row,leavesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.leavesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent leavesRowDeleting(Me, New leavesRowChangeEvent(CType(e.Row,leavesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveleavesRow(ByVal row As leavesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As payslipdbv2DataSet = New payslipdbv2DataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "leavesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class auditsDataTable
+        Inherits Global.System.Data.TypedTableBase(Of auditsRow)
+        
+        Private columnid As Global.System.Data.DataColumn
+        
+        Private columnuser_id As Global.System.Data.DataColumn
+        
+        Private columnuser As Global.System.Data.DataColumn
+        
+        Private columndetail As Global.System.Data.DataColumn
+        
+        Private columndatetime As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "audits"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property user_idColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnuser_id
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property userColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnuser
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property detailColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndetail
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property datetimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndatetime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As auditsRow
+            Get
+                Return CType(Me.Rows(index),auditsRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event auditsRowChanging As auditsRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event auditsRowChanged As auditsRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event auditsRowDeleting As auditsRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event auditsRowDeleted As auditsRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddauditsRow(ByVal row As auditsRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddauditsRow(ByVal parentuser_accountsRowByauditids As user_accountsRow, ByVal user As String, ByVal detail As String, ByVal datetime As Date) As auditsRow
+            Dim rowauditsRow As auditsRow = CType(Me.NewRow,auditsRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, user, detail, datetime}
+            If (Not (parentuser_accountsRowByauditids) Is Nothing) Then
+                columnValuesArray(1) = parentuser_accountsRowByauditids(0)
+            End If
+            rowauditsRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowauditsRow)
+            Return rowauditsRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindByid(ByVal id As Integer) As auditsRow
+            Return CType(Me.Rows.Find(New Object() {id}),auditsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As auditsDataTable = CType(MyBase.Clone,auditsDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New auditsDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnid = MyBase.Columns("id")
+            Me.columnuser_id = MyBase.Columns("user_id")
+            Me.columnuser = MyBase.Columns("user")
+            Me.columndetail = MyBase.Columns("detail")
+            Me.columndatetime = MyBase.Columns("datetime")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnid = New Global.System.Data.DataColumn("id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnid)
+            Me.columnuser_id = New Global.System.Data.DataColumn("user_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnuser_id)
+            Me.columnuser = New Global.System.Data.DataColumn("user", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnuser)
+            Me.columndetail = New Global.System.Data.DataColumn("detail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndetail)
+            Me.columndatetime = New Global.System.Data.DataColumn("datetime", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndatetime)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnid}, true))
+            Me.columnid.AutoIncrement = true
+            Me.columnid.AutoIncrementSeed = -1
+            Me.columnid.AutoIncrementStep = -1
+            Me.columnid.AllowDBNull = false
+            Me.columnid.Unique = true
+            Me.columnuser_id.AllowDBNull = false
+            Me.columnuser.AllowDBNull = false
+            Me.columnuser.MaxLength = 65535
+            Me.columndetail.AllowDBNull = false
+            Me.columndetail.MaxLength = 65535
+            Me.columndatetime.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewauditsRow() As auditsRow
+            Return CType(Me.NewRow,auditsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New auditsRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(auditsRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.auditsRowChangedEvent) Is Nothing) Then
+                RaiseEvent auditsRowChanged(Me, New auditsRowChangeEvent(CType(e.Row,auditsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.auditsRowChangingEvent) Is Nothing) Then
+                RaiseEvent auditsRowChanging(Me, New auditsRowChangeEvent(CType(e.Row,auditsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.auditsRowDeletedEvent) Is Nothing) Then
+                RaiseEvent auditsRowDeleted(Me, New auditsRowChangeEvent(CType(e.Row,auditsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.auditsRowDeletingEvent) Is Nothing) Then
+                RaiseEvent auditsRowDeleting(Me, New auditsRowChangeEvent(CType(e.Row,auditsRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveauditsRow(ByVal row As auditsRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As payslipdbv2DataSet = New payslipdbv2DataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "auditsDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class employeeRow
@@ -1848,6 +2949,26 @@ Partial Public Class payslipdbv2DataSet
                 Return New timeinoutRow(-1) {}
             Else
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("userconstraint")),timeinoutRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function GetabsentRows() As absentRow()
+            If (Me.Table.ChildRelations("employee") Is Nothing) Then
+                Return New absentRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("employee")),absentRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function GetleavesRows() As leavesRow()
+            If (Me.Table.ChildRelations("leavesemployee") Is Nothing) Then
+                Return New leavesRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("leavesemployee")),leavesRow())
             End If
         End Function
     End Class
@@ -2046,6 +3167,16 @@ Partial Public Class payslipdbv2DataSet
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("reportuser")),reportsRow())
             End If
         End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function GetauditsRows() As auditsRow()
+            If (Me.Table.ChildRelations("auditids") Is Nothing) Then
+                Return New auditsRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("auditids")),auditsRow())
+            End If
+        End Function
     End Class
     
     '''<summary>
@@ -2137,6 +3268,252 @@ Partial Public Class payslipdbv2DataSet
             End Get
             Set
                 Me.SetParentRow(value, Me.Table.ParentRelations("reportuser"))
+            End Set
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class absentRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableabsent As absentDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableabsent = CType(Me.Table,absentDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property id() As Integer
+            Get
+                Return CType(Me(Me.tableabsent.idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableabsent.idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employee_id() As Integer
+            Get
+                Return CType(Me(Me.tableabsent.employee_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableabsent.employee_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employee() As String
+            Get
+                Return CType(Me(Me.tableabsent.employeeColumn),String)
+            End Get
+            Set
+                Me(Me.tableabsent.employeeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property detail() As String
+            Get
+                Return CType(Me(Me.tableabsent.detailColumn),String)
+            End Get
+            Set
+                Me(Me.tableabsent.detailColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property _date() As Date
+            Get
+                Return CType(Me(Me.tableabsent.dateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableabsent.dateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employeeRow() As employeeRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("employee")),employeeRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("employee"))
+            End Set
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class leavesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableleaves As leavesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableleaves = CType(Me.Table,leavesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property id() As Integer
+            Get
+                Return CType(Me(Me.tableleaves.idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableleaves.idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employee_id() As Integer
+            Get
+                Return CType(Me(Me.tableleaves.employee_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableleaves.employee_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employee() As String
+            Get
+                Return CType(Me(Me.tableleaves.employeeColumn),String)
+            End Get
+            Set
+                Me(Me.tableleaves.employeeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property detail() As String
+            Get
+                Return CType(Me(Me.tableleaves.detailColumn),String)
+            End Get
+            Set
+                Me(Me.tableleaves.detailColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property _date() As Date
+            Get
+                Return CType(Me(Me.tableleaves.dateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableleaves.dateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property employeeRow() As employeeRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("leavesemployee")),employeeRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("leavesemployee"))
+            End Set
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class auditsRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableaudits As auditsDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableaudits = CType(Me.Table,auditsDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property id() As Integer
+            Get
+                Return CType(Me(Me.tableaudits.idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableaudits.idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property user_id() As Integer
+            Get
+                Return CType(Me(Me.tableaudits.user_idColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableaudits.user_idColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property user() As String
+            Get
+                Return CType(Me(Me.tableaudits.userColumn),String)
+            End Get
+            Set
+                Me(Me.tableaudits.userColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property detail() As String
+            Get
+                Return CType(Me(Me.tableaudits.detailColumn),String)
+            End Get
+            Set
+                Me(Me.tableaudits.detailColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property datetime() As Date
+            Get
+                Return CType(Me(Me.tableaudits.datetimeColumn),Date)
+            End Get
+            Set
+                Me(Me.tableaudits.datetimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property user_accountsRow() As user_accountsRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("auditids")),user_accountsRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("auditids"))
             End Set
         End Property
     End Class
@@ -2271,6 +3648,114 @@ Partial Public Class payslipdbv2DataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Row() As reportsRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class absentRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As absentRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As absentRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As absentRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class leavesRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As leavesRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As leavesRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As leavesRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class auditsRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As auditsRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As auditsRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As auditsRow
             Get
                 Return Me.eventRow
             End Get
@@ -4207,6 +5692,1260 @@ Namespace payslipdbv2DataSetTableAdapters
     End Class
     
     '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class absentTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+        
+        Private _connection As Global.MySql.Data.MySqlClient.MySqlConnection
+        
+        Private _transaction As Global.MySql.Data.MySqlClient.MySqlTransaction
+        
+        Private _commandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Connection() As Global.MySql.Data.MySqlClient.MySqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.MySql.Data.MySqlClient.MySqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Transaction() As Global.MySql.Data.MySqlClient.MySqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "absent"
+            tableMapping.ColumnMappings.Add("id", "id")
+            tableMapping.ColumnMappings.Add("employee_id", "employee_id")
+            tableMapping.ColumnMappings.Add("employee", "employee")
+            tableMapping.ColumnMappings.Add("detail", "detail")
+            tableMapping.ColumnMappings.Add("date", "date")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `absent` WHERE ((`id` = @p1) AND (`employee_id` = @p2) AND (`date` = "& _ 
+                "@p3))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `absent` (`employee_id`, `employee`, `detail`, `date`) VALUES (@p1, @"& _ 
+                "p2, @p3, @p4)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "employee"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `absent` SET `employee_id` = @p1, `employee` = @p2, `detail` = @p3, `date`"& _ 
+                " = @p4 WHERE ((`id` = @p5) AND (`employee_id` = @p6) AND (`date` = @p7))"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "employee"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection()
+            Me._connection.ConnectionString = Global.group5_payslipsystemv2.My.MySettings.Default.payslipdbv2ConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
+            Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT id, employee_id, employee, detail, `date` FROM absent"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As payslipdbv2DataSet.absentDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As payslipdbv2DataSet.absentDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As payslipdbv2DataSet.absentDataTable = New payslipdbv2DataSet.absentDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As payslipdbv2DataSet.absentDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As payslipdbv2DataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "absent")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Date) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(p2,Integer)
+            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(p3,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(p4,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date, ByVal p5 As Integer, ByVal p6 As Integer, ByVal p7 As Date) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,Date)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(p5,Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(p6,Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(p7,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class leavesTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+        
+        Private _connection As Global.MySql.Data.MySqlClient.MySqlConnection
+        
+        Private _transaction As Global.MySql.Data.MySqlClient.MySqlTransaction
+        
+        Private _commandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Connection() As Global.MySql.Data.MySqlClient.MySqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.MySql.Data.MySqlClient.MySqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Transaction() As Global.MySql.Data.MySqlClient.MySqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "leaves"
+            tableMapping.ColumnMappings.Add("id", "id")
+            tableMapping.ColumnMappings.Add("employee_id", "employee_id")
+            tableMapping.ColumnMappings.Add("employee", "employee")
+            tableMapping.ColumnMappings.Add("detail", "detail")
+            tableMapping.ColumnMappings.Add("date", "date")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `leaves` WHERE ((`id` = @p1) AND (`employee_id` = @p2) AND (`date` = "& _ 
+                "@p3))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `leaves` (`employee_id`, `employee`, `detail`, `date`) VALUES (@p1, @"& _ 
+                "p2, @p3, @p4)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "employee"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `leaves` SET `employee_id` = @p1, `employee` = @p2, `detail` = @p3, `date`"& _ 
+                " = @p4 WHERE ((`id` = @p5) AND (`employee_id` = @p6) AND (`date` = @p7))"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "employee"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "employee_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.DateTime
+            param.IsNullable = true
+            param.SourceColumn = "date"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection()
+            Me._connection.ConnectionString = Global.group5_payslipsystemv2.My.MySettings.Default.payslipdbv2ConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
+            Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT `id`, `employee_id`, `employee`, `detail`, `date` FROM `leaves`"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As payslipdbv2DataSet.leavesDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As payslipdbv2DataSet.leavesDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As payslipdbv2DataSet.leavesDataTable = New payslipdbv2DataSet.leavesDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As payslipdbv2DataSet.leavesDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As payslipdbv2DataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "leaves")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Date) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(p2,Integer)
+            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(p3,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(p4,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date, ByVal p5 As Integer, ByVal p6 As Integer, ByVal p7 As Date) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,Date)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(p5,Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(p6,Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(p7,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class auditsTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+        
+        Private _connection As Global.MySql.Data.MySqlClient.MySqlConnection
+        
+        Private _transaction As Global.MySql.Data.MySqlClient.MySqlTransaction
+        
+        Private _commandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.MySql.Data.MySqlClient.MySqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Connection() As Global.MySql.Data.MySqlClient.MySqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.MySql.Data.MySqlClient.MySqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Transaction() As Global.MySql.Data.MySqlClient.MySqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.MySql.Data.MySqlClient.MySqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "audits"
+            tableMapping.ColumnMappings.Add("id", "id")
+            tableMapping.ColumnMappings.Add("user_id", "user_id")
+            tableMapping.ColumnMappings.Add("user", "user")
+            tableMapping.ColumnMappings.Add("detail", "detail")
+            tableMapping.ColumnMappings.Add("datetime", "datetime")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `audits` WHERE ((`id` = @p1) AND (`user_id` = @p2) AND (`datetime` = "& _ 
+                "@p3))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "user_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Timestamp
+            param.IsNullable = true
+            param.SourceColumn = "datetime"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `audits` (`user_id`, `user`, `detail`, `datetime`) VALUES (@p1, @p2, "& _ 
+                "@p3, @p4)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "user_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "user"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Timestamp
+            param.IsNullable = true
+            param.SourceColumn = "datetime"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `audits` SET `user_id` = @p1, `user` = @p2, `detail` = @p3, `datetime` = @"& _ 
+                "p4 WHERE ((`id` = @p5) AND (`user_id` = @p6) AND (`datetime` = @p7))"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "user_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "user"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Text
+            param.IsNullable = true
+            param.SourceColumn = "detail"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Timestamp
+            param.IsNullable = true
+            param.SourceColumn = "datetime"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Current
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "user_id"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
+            param.DbType = Global.System.Data.DbType.DateTime
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Timestamp
+            param.IsNullable = true
+            param.SourceColumn = "datetime"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection()
+            Me._connection.ConnectionString = Global.group5_payslipsystemv2.My.MySettings.Default.payslipdbv2ConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
+            Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT `id`, `user_id`, `user`, `detail`, `datetime` FROM `audits`"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As payslipdbv2DataSet.auditsDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As payslipdbv2DataSet.auditsDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As payslipdbv2DataSet.auditsDataTable = New payslipdbv2DataSet.auditsDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As payslipdbv2DataSet.auditsDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As payslipdbv2DataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "audits")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Date) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(p2,Integer)
+            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(p3,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(p4,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal p1 As Integer, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Date, ByVal p5 As Integer, ByVal p6 As Integer, ByVal p7 As Date) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p2")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(p2,String)
+            End If
+            If (p3 Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("p3")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,Date)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(p5,Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(p6,Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(p7,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+    End Class
+    
+    '''<summary>
     '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     '''</summary>
     <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -4226,6 +6965,12 @@ Namespace payslipdbv2DataSetTableAdapters
         Private _user_accountsTableAdapter As user_accountsTableAdapter
         
         Private _reportsTableAdapter As reportsTableAdapter
+        
+        Private _absentTableAdapter As absentTableAdapter
+        
+        Private _leavesTableAdapter As leavesTableAdapter
+        
+        Private _auditsTableAdapter As auditsTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -4299,6 +7044,48 @@ Namespace payslipdbv2DataSetTableAdapters
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property absentTableAdapter() As absentTableAdapter
+            Get
+                Return Me._absentTableAdapter
+            End Get
+            Set
+                Me._absentTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property leavesTableAdapter() As leavesTableAdapter
+            Get
+                Return Me._leavesTableAdapter
+            End Get
+            Set
+                Me._leavesTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property auditsTableAdapter() As auditsTableAdapter
+            Get
+                Return Me._auditsTableAdapter
+            End Get
+            Set
+                Me._auditsTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -4333,6 +7120,18 @@ Namespace payslipdbv2DataSetTableAdapters
                             AndAlso (Not (Me._reportsTableAdapter.Connection) Is Nothing)) Then
                     Return Me._reportsTableAdapter.Connection
                 End If
+                If ((Not (Me._absentTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._absentTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._absentTableAdapter.Connection
+                End If
+                If ((Not (Me._leavesTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._leavesTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._leavesTableAdapter.Connection
+                End If
+                If ((Not (Me._auditsTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._auditsTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._auditsTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -4356,6 +7155,15 @@ Namespace payslipdbv2DataSetTableAdapters
                     count = (count + 1)
                 End If
                 If (Not (Me._reportsTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._absentTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._auditsTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -4405,6 +7213,33 @@ Namespace payslipdbv2DataSetTableAdapters
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
+            If (Not (Me._absentTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.absent.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._absentTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.leaves.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._leavesTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._auditsTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.audits.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._auditsTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -4447,6 +7282,30 @@ Namespace payslipdbv2DataSetTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
+            If (Not (Me._absentTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.absent.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._absentTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.leaves.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._leavesTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._auditsTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.audits.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._auditsTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -4457,6 +7316,30 @@ Namespace payslipdbv2DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Function UpdateDeletedRows(ByVal dataSet As payslipdbv2DataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._auditsTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.audits.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._auditsTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.leaves.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._leavesTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._absentTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.absent.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._absentTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
             If (Not (Me._reportsTableAdapter) Is Nothing) Then
                 Dim deletedRows() As Global.System.Data.DataRow = dataSet.reports.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
@@ -4550,6 +7433,21 @@ Namespace payslipdbv2DataSetTableAdapters
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
+            If ((Not (Me._absentTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._absentTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._leavesTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._leavesTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._auditsTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._auditsTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
             If (workConnection Is Nothing) Then
                 Throw New Global.System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana"& _ 
@@ -4616,6 +7514,33 @@ Namespace payslipdbv2DataSetTableAdapters
                     If Me._reportsTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._reportsTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._reportsTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._absentTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._absentTableAdapter, Me._absentTableAdapter.Connection)
+                    Me._absentTableAdapter.Connection = CType(workConnection,Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._absentTableAdapter.Transaction = CType(workTransaction,Global.MySql.Data.MySqlClient.MySqlTransaction)
+                    If Me._absentTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._absentTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._absentTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._leavesTableAdapter, Me._leavesTableAdapter.Connection)
+                    Me._leavesTableAdapter.Connection = CType(workConnection,Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._leavesTableAdapter.Transaction = CType(workTransaction,Global.MySql.Data.MySqlClient.MySqlTransaction)
+                    If Me._leavesTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._leavesTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._leavesTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._auditsTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._auditsTableAdapter, Me._auditsTableAdapter.Connection)
+                    Me._auditsTableAdapter.Connection = CType(workConnection,Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._auditsTableAdapter.Transaction = CType(workTransaction,Global.MySql.Data.MySqlClient.MySqlTransaction)
+                    If Me._auditsTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._auditsTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._auditsTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -4693,6 +7618,18 @@ Namespace payslipdbv2DataSetTableAdapters
                 If (Not (Me._reportsTableAdapter) Is Nothing) Then
                     Me._reportsTableAdapter.Connection = CType(revertConnections(Me._reportsTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
                     Me._reportsTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._absentTableAdapter) Is Nothing) Then
+                    Me._absentTableAdapter.Connection = CType(revertConnections(Me._absentTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._absentTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._leavesTableAdapter) Is Nothing) Then
+                    Me._leavesTableAdapter.Connection = CType(revertConnections(Me._leavesTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._leavesTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._auditsTableAdapter) Is Nothing) Then
+                    Me._auditsTableAdapter.Connection = CType(revertConnections(Me._auditsTableAdapter),Global.MySql.Data.MySqlClient.MySqlConnection)
+                    Me._auditsTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter

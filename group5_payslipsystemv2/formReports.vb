@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class formReports
     Dim functionReports As New functionReports()
+    Dim functionAudit As New functionAudit()
     Dim db As New dbConnector()
     Dim id As Decimal = Nothing
     Private Sub formReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -104,6 +105,8 @@ Public Class formReports
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
         If titleTextBox.Text IsNot "" Then
+            Dim audit As String = "Delete report titled: " + titleTextBox.Text
+            functionAudit.insertAudit(audit)
             functionReports.deleteReport(id)
             MessageBox.Show("Report Deleted.", "Deleted")
             updateData()
@@ -122,6 +125,8 @@ Public Class formReports
                 table.Columns.Add(dtNames(i))
             Next
 
+            Dim audit As String = "Generate report titled: " + titleTextBox.Text
+            functionAudit.insertAudit(audit)
             table.Rows.Add(titleTextBox.Text, reportRichTextBox.Text, dateTextBox.Text, authorTextBox.Text)
             formReportGen.reporttable = table
             formReportGen.ShowDialog()

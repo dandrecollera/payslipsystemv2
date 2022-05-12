@@ -2,6 +2,7 @@
 Public Class formEmployee
     Dim db As New dbConnector()
     Dim functionEmployee As New functionEmployee()
+    Dim functionAudit As New functionAudit()
     Private Sub formEmployee_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'Payslipdbv2DataSet.employee' table. You can move, or remove it, as needed.
         Me.EmployeeTableAdapter.Fill(Me.Payslipdbv2DataSet.employee)
@@ -100,7 +101,10 @@ Public Class formEmployee
 
     Private Sub deleteButton_Click(sender As Object, e As EventArgs) Handles deleteButton.Click
         If idTextBox.Text IsNot "" Then
+            Dim audit As String = "Deleted an employee: " + idTextBox.Text + ": " + nameTextBox.Text
             functionEmployee.deleteEmployee(idTextBox.Text.Trim())
+
+            functionAudit.insertAudit(audit)
             MessageBox.Show("Employee Deleted.", "Deleted")
             updateData()
         Else

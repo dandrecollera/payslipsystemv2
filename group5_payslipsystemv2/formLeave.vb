@@ -1,11 +1,12 @@
 ﻿Imports MySql.Data.MySqlClient
-Public Class formAbsent
+
+Public Class formLeave
     Dim functionAudit As New functionAudit()
-    Dim functionAbsent As New functionAbsent()
+    Dim functionLeave As New functionLeave()
     Dim db As New dbConnector()
-    Private Sub formAbsent_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'Payslipdbv2DataSet.absent' table. You can move, or remove it, as needed.
-        Me.AbsentTableAdapter.Fill(Me.Payslipdbv2DataSet.absent)
+    Private Sub formLeave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'Payslipdbv2DataSet.leaves' table. You can move, or remove it, as needed.
+        Me.LeavesTableAdapter.Fill(Me.Payslipdbv2DataSet.leaves)
 
     End Sub
 
@@ -17,16 +18,16 @@ Public Class formAbsent
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
-        Dim formAbsentAdd As New formAbsentAdd()
-        If formAbsentAdd.ShowDialog() = DialogResult.OK Then
+        Dim formLeaveAdd As New formLeaveAdd()
+        If formLeaveAdd.ShowDialog() = DialogResult.OK Then
             updateData()
         End If
     End Sub
 
     Private Sub updateData()
         clearFields()
-        Dim command As New MySqlCommand("SELECT * FROM `absent`")
-        Dim table As DataTable = functionAbsent.getAbsent(command)
+        Dim command As New MySqlCommand("SELECT * FROM `leaves`")
+        Dim table As DataTable = functionLeave.getLeaves(command)
         DataGridView1.DataSource = table
     End Sub
 
@@ -66,9 +67,9 @@ Public Class formAbsent
     Private Sub searchAbsent()
         Try
             Dim searchInput As String = searchTextBox.Text
-            Dim command As New MySqlCommand("SELECT * FROM `absent` WHERE `employee` LIKE @input OR `employee_id` LIKE @input", db.getConnection)
+            Dim command As New MySqlCommand("SELECT * FROM `leaves` WHERE `employee` LIKE @input OR `employee_id` LIKE @input", db.getConnection)
             command.Parameters.AddWithValue("@input", "%" + searchInput + "%")
-            Dim table As DataTable = functionAbsent.getAbsent(command)
+            Dim table As DataTable = functionLeave.getLeaves(command)
 
             DataGridView1.DataSource = table
             fillFields(table.Rows(0)("employee_id"), table.Rows(0)("employee"), table.Rows(0)("detail"), table.Rows(0)("date"))
@@ -79,7 +80,7 @@ Public Class formAbsent
 
     Private Sub generateButton_Click(sender As Object, e As EventArgs) Handles generateButton.Click
         If employeeIdTextBox.Text IsNot "" Then
-            Dim formAbsentGen As New formAbsentGen()
+            Dim formLeaveGen As New formLeaveGen()
             Dim table As New DataTable()
             Dim dtNames() As String = {"employee_id", "employee", "details", "dates"}
             Dim i As Decimal
@@ -87,7 +88,7 @@ Public Class formAbsent
                 table.Columns.Add(dtNames(i))
             Next
 
-            Dim audit As String = "Generated Absent Report for: " + employeeTextBox.Text
+            Dim audit As String = "Generated Leave Report for: " + employeeTextBox.Text
             functionAudit.insertAudit(audit)
 
             table.Rows.Add(employeeIdTextBox.Text, employeeTextBox.Text, detailRichTextBox.Text, dateTextBox.Text)

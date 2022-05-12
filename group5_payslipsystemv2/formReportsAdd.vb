@@ -1,6 +1,8 @@
 ﻿Public Class formReportsAdd
     Dim authId As Decimal
     Dim functionReports As New functionReports()
+    Dim functionAudit As New functionAudit()
+
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
         Me.Close()
     End Sub
@@ -10,6 +12,8 @@
             MessageBox.Show("Input all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             If functionReports.insertReport(authId, authorTextBox.Text, titleTextBox.Text, reportRichTextBox.Text) Then
+                Dim audit As String = "Added new report titled: " + titleTextBox.Text
+                functionAudit.insertAudit(audit)
                 MessageBox.Show("Report Added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.DialogResult = DialogResult.OK
                 Me.Close()

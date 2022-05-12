@@ -1,5 +1,6 @@
 ﻿Public Class formEmployeeAdd
     Dim functionEmployee As New functionEmployee()
+    Dim functionAudit As New functionAudit()
     Private Sub cancelButton_Click(sender As Object, e As EventArgs) Handles cancelButton.Click
         Me.Close()
     End Sub
@@ -9,6 +10,8 @@
             MessageBox.Show("Input all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             If functionEmployee.insertEmployee(nameTextBox.Text.Trim(), emailTextBox.Text.Trim(), contactTextBox.Text.Trim(), addressRichTextBox.Text.Trim(), baseSalaryTextBox.Text.Trim()) Then
+                Dim audit As String = "Added a new employee: " + nameTextBox.Text
+                functionAudit.insertAudit(audit)
                 MessageBox.Show("Employee Added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.DialogResult = DialogResult.OK
                 Me.Close()

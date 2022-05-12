@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class formPayslip
+    Dim functionAudit As New functionAudit()
     Public id As Decimal
     Public employeeName As String
     Public baseSalary As Double
@@ -208,6 +209,8 @@ Public Class formPayslip
 
             table.Rows.Add(name, month, cutOff, generalsalary, overtime, bonus, totalwodeduct, sss, pagibig, philhealth, tax, finaltotal, year)
             formPayslipGen.paysliptable = table
+            Dim audit As String = "Generated Payslip for: " + name
+            functionAudit.insertAudit(audit)
             Me.Hide()
             formPayslipGen.ShowDialog()
             Me.Close()

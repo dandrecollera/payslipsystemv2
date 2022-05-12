@@ -93,11 +93,48 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="absents.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>absents.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="audit.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>audit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="audit.vb">
+      <DependentUpon>audit.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dbConnector.vb" />
     <Compile Include="formAbsent.Designer.vb">
       <DependentUpon>formAbsent.vb</DependentUpon>
     </Compile>
     <Compile Include="formAbsent.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAbsentAdd.Designer.vb">
+      <DependentUpon>formAbsentAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAbsentAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAbsentGen.Designer.vb">
+      <DependentUpon>formAbsentGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAbsentGen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAudit.Designer.vb">
+      <DependentUpon>formAudit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAudit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAuditGen.Designer.vb">
+      <DependentUpon>formAuditGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAuditGen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formCreateAccount.Designer.vb">
@@ -122,6 +159,24 @@
       <DependentUpon>formEmployeeEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="formEmployeeEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLeave.Designer.vb">
+      <DependentUpon>formLeave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formLeave.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLeaveAdd.Designer.vb">
+      <DependentUpon>formLeaveAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formLeaveAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLeaveGen.Designer.vb">
+      <DependentUpon>formLeaveGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formLeaveGen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formLogin.Designer.vb">
@@ -178,10 +233,18 @@
     <Compile Include="formTimeInput.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="functionAbsent.vb" />
     <Compile Include="functionAccount.vb" />
+    <Compile Include="functionAudit.vb" />
     <Compile Include="functionEmployee.vb" />
+    <Compile Include="functionLeave.vb" />
     <Compile Include="functionReports.vb" />
     <Compile Include="functionTime.vb" />
+    <Compile Include="leave.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>leave.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -224,6 +287,18 @@
     <EmbeddedResource Include="formAbsent.resx">
       <DependentUpon>formAbsent.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formAbsentAdd.resx">
+      <DependentUpon>formAbsentAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAbsentGen.resx">
+      <DependentUpon>formAbsentGen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAudit.resx">
+      <DependentUpon>formAudit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAuditGen.resx">
+      <DependentUpon>formAuditGen.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formCreateAccount.resx">
       <DependentUpon>formCreateAccount.vb</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +310,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formEmployeeEdit.resx">
       <DependentUpon>formEmployeeEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formLeave.resx">
+      <DependentUpon>formLeave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formLeaveAdd.resx">
+      <DependentUpon>formLeaveAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formLeaveGen.resx">
+      <DependentUpon>formLeaveGen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formLogin.resx">
       <DependentUpon>formLogin.vb</DependentUpon>
@@ -271,8 +355,44 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
+    <EmbeddedResource Include="Report3.rdlc" />
+    <EmbeddedResource Include="Report4.rdlc" />
+    <EmbeddedResource Include="Report5.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="absents.xsc">
+      <DependentUpon>absents.xsd</DependentUpon>
+    </None>
+    <None Include="absents.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>absents.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="absents.xss">
+      <DependentUpon>absents.xsd</DependentUpon>
+    </None>
+    <None Include="audit.xsc">
+      <DependentUpon>audit.xsd</DependentUpon>
+    </None>
+    <None Include="audit.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>audit.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="audit.xss">
+      <DependentUpon>audit.xsd</DependentUpon>
+    </None>
+    <None Include="leave.xsc">
+      <DependentUpon>leave.xsd</DependentUpon>
+    </None>
+    <None Include="leave.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>leave.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="leave.xss">
+      <DependentUpon>leave.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

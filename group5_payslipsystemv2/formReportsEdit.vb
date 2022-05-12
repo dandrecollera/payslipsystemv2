@@ -1,5 +1,6 @@
 ﻿Public Class formReportsEdit
     Dim functionReports As New functionReports()
+    Dim functionAudit As New functionAudit()
     Public id As Decimal
     Dim authId As Decimal
 
@@ -17,6 +18,8 @@
             MessageBox.Show("Input all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             If functionReports.updateReport(id, authId, authorTextBox.Text, titleTextBox.Text, reportRichTextBox.Text) Then
+                Dim audit As String = "Report edited with an id and title of: " + id + ": " + titleTextBox.Text
+                functionAudit.insertAudit(audit)
                 MessageBox.Show("Report Updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.DialogResult = DialogResult.OK
                 Me.Close()

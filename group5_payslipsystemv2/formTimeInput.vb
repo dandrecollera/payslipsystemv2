@@ -56,10 +56,4 @@
             End If
         End If
     End Sub
-
-    Private Sub solveTime()
-
-
-    End Sub
-
 End Class

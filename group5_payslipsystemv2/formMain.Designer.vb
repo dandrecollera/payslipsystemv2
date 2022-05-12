@@ -23,9 +23,9 @@ Partial Class formMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formMain))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,10 +45,10 @@ Partial Class formMain
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.TimeinoutTableAdapter = New group5_payslipsystemv2.payslipdbv2DataSetTableAdapters.timeinoutTableAdapter()
         Me.buttonTimeInOut = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeinoutBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Payslipdbv2DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,18 +94,18 @@ Partial Class formMain
         'TimeinDataGridViewTextBoxColumn
         '
         Me.TimeinDataGridViewTextBoxColumn.DataPropertyName = "timein"
-        DataGridViewCellStyle4.Format = "t"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.TimeinDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Format = "t"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.TimeinDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle1
         Me.TimeinDataGridViewTextBoxColumn.HeaderText = "Time In"
         Me.TimeinDataGridViewTextBoxColumn.Name = "TimeinDataGridViewTextBoxColumn"
         '
         'TimeoutDataGridViewTextBoxColumn
         '
         Me.TimeoutDataGridViewTextBoxColumn.DataPropertyName = "timeout"
-        DataGridViewCellStyle5.Format = "t"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.TimeoutDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Format = "t"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.TimeoutDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
         Me.TimeoutDataGridViewTextBoxColumn.HeaderText = "Time Out"
         Me.TimeoutDataGridViewTextBoxColumn.Name = "TimeoutDataGridViewTextBoxColumn"
         '
@@ -133,9 +133,9 @@ Partial Class formMain
         'DateDataGridViewTextBoxColumn
         '
         Me.DateDataGridViewTextBoxColumn.DataPropertyName = "date"
-        DataGridViewCellStyle6.Format = "d"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.DateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Format = "d"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.DateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
         Me.DateDataGridViewTextBoxColumn.HeaderText = "Date"
         Me.DateDataGridViewTextBoxColumn.Name = "DateDataGridViewTextBoxColumn"
         '
@@ -203,6 +203,15 @@ Partial Class formMain
         Me.ToolStripButton5.Size = New System.Drawing.Size(63, 22)
         Me.ToolStripButton5.Text = "Audit Log"
         '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButton6.Image = CType(resources.GetObject("ToolStripButton6.Image"), System.Drawing.Image)
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(49, 22)
+        Me.ToolStripButton6.Text = "Logout"
+        '
         'TimeinoutTableAdapter
         '
         Me.TimeinoutTableAdapter.ClearBeforeFill = True
@@ -225,15 +234,6 @@ Partial Class formMain
         Me.Label1.Size = New System.Drawing.Size(137, 20)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Time In / Time Out"
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton6.Image = CType(resources.GetObject("ToolStripButton6.Image"), System.Drawing.Image)
-        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(49, 22)
-        Me.ToolStripButton6.Text = "Logout"
         '
         'formMain
         '
